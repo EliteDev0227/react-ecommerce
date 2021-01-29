@@ -8,8 +8,12 @@ const ButtonWrapper = styled.div`
   text-transform: uppercase;
   font-weight: lighter;
   padding: 10px 14px;
+  ${({ darkMode }) => darkMode && `
+    background-color: #10504f;
+    border: 1px solid white;
+  `}
 `;
 
-const Button = ({ text }) => <ButtonWrapper>{text}</ButtonWrapper>;
+const Button = (props) => <ButtonWrapper darkMode={props.darkMode}>{props.text}</ButtonWrapper>;
 
 export default Button;

@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FALSE } from 'node-sass';
 import styles from './ShopForm.module.scss';
 import Button from '../Button';
 
@@ -28,28 +26,24 @@ const HeroButtonWrapper = styled.div`
   justify-content: center;
 `;
 
+const TitleIcon = styled.img`
+  size: 20px;
+  margin-right: 10px;
+`;
+
 const ShopForm = (props) => (
-  <div className={styles.ShopForm} data-testid="ShopForm">
-    <HeroText>{props.title}</HeroText>
+  <div className={props.darkMode ? `${styles.ShopForm} ${styles.dark}` : styles.ShopForm} data-testid="ShopForm">
+    <div className="text-title">
+      {props.titleIcon
+        ? <TitleIcon src={props.titleIcon} />
+        : ''}
+      {props.title}
+    </div>
     <HeroSubText>{ props.body}</HeroSubText>
     <HeroButtonWrapper>
-      <Button text={props.buttonText} />
+      <Button text={props.buttonText} darkMode={props.darkMode} />
     </HeroButtonWrapper>
   </div>
 );
-
-ShopForm.propTypes = {
-  title: PropTypes.string,
-  body: PropTypes.string,
-  buttonText: PropTypes.string,
-  darkMode: PropTypes.bool,
-};
-
-ShopForm.defaultProps = {
-  title: 'Shop New Arrivals',
-  body: 'Our coolest new items are waiting for you!',
-  buttonText: 'Shop Now',
-  darkMode: FALSE,
-};
 
 export default ShopForm;

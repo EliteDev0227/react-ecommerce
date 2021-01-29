@@ -39,16 +39,9 @@ const Logo = styled.img`
 `;
 
 const MenuIconWrapper = styled.div`
-width:100%;
-padding-right: 20px;
+  width:100%;
+  padding-right: 10px;
 `;
-const MenuIcon = styled.img`
-  size: 20px;
-  float: right;
-  margin-left: 20px;
-  margin-right: 0px;
-`;
-
 const navItems = [
   { name: 'Mens', route: '/' },
   { name: 'Womens', route: '/' },
@@ -63,7 +56,7 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <MenuIcon src={menuIcon} />
+      <img className="icon" src={menuIcon} />
       <Logo src={logo} />
       <MenuWrapper>
         {size.width > 1024 ? (
@@ -77,7 +70,7 @@ const Header = () => {
         ) : null}
         <MenuIconWrapper>
           {icons.map(item => (
-            <MenuIcon src={item} />
+            <img className="icon float-right" src={item} />
           ))}
         </MenuIconWrapper>
 

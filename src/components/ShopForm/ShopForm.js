@@ -4,17 +4,8 @@ import styled from 'styled-components';
 import styles from './ShopForm.module.scss';
 import Button from '../Button';
 
-const HeroText = styled.div`
-  font-family: "Pacifico", cursive;
-  font-weight: lighter;
-  font-size: 26px;
-`;
-
-const HeroSubText = styled.div`
+const BodyWrapper = styled.div`
   width: 80%;
-  font-size: 14px;
-  font-family: "Lato", sans-sans-serif;
-  font-weight: lighter;
   text-align: center;
 `;
 
@@ -39,7 +30,10 @@ const ShopForm = (props) => (
         : ''}
       {props.title}
     </div>
-    <HeroSubText>{ props.body}</HeroSubText>
+    <BodyWrapper>
+      <div className="text-subtitle">{props.body}</div>
+    </BodyWrapper>
+
     <HeroButtonWrapper>
       <Button text={props.buttonText} darkMode={props.darkMode} />
     </HeroButtonWrapper>

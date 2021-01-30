@@ -7,7 +7,6 @@ import instagramIcon from '../../assets/instagram.svg';
 
 const Wrapper = styled.div`
   background-color: black;
-  width: 100%;
   padding: 20px;
 `;
 

@@ -10,12 +10,6 @@ body {
   position: relative;
 }
 
-body::after {
-  content: "";
-  display: block;
-  height: 100px;
-}
-
 .text-title {
   font-family: "Pacifico", cursive;
   font-weight: lighter;

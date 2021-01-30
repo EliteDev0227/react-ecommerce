@@ -1,0 +1,16 @@
+.ShopForm {
+  background-color: #EFEFEF;
+  color: #10504f;
+  padding-top: 15px;
+  padding-bottom: 35px;
+  display: flex;
+  flex-direction: column; 
+  row-gap: 10px;
+  align-items: center;
+}
+
+.dark 
+{
+  background-color: #10504f;
+  color: white;
+}

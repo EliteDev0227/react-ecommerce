@@ -1,0 +1,46 @@
+$body-bg: #fff;
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+body::after {
+  content: "";
+  display: block;
+  height: 100px;
+}
+
+.text-title {
+  font-family: "Pacifico", cursive;
+  font-weight: lighter;
+  font-size: 26px;
+}
+
+.text-subtitle {
+  font-size: 14px;
+  font-family: "Lato", sans-sans-serif;
+  font-weight: lighter;
+}
+
+.color-white {
+  color: white;
+}
+
+.color-black {
+  color: black;
+}
+
+.icon {
+  size: 20px;
+  margin: 10px;
+}
+
+.float-right {
+  float: right;
+}

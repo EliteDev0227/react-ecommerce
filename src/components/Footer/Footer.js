@@ -63,9 +63,10 @@ const Wrapper = styled.div`
 `;
 
 const AccordionWrapper = styled.div`
-  margin-bottom: -10px;
+  margin-top: -10px;
   margin-bottom: 10px;
 `;
+
 const IconWrapper = styled.div`
   margin-left: -10px;
   display: flex;

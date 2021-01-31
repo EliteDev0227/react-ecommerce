@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { useDispatch, useSelector } from 'react-redux';
+import { openMenu, getMenuOpen } from '../../actions';
 import { useWindowSize } from '../../hooks';
+import SideMenu from '../SideMenu/SideMenu';
 
 import logo from '../../assets/logo.png';
 import menuIcon from '../../assets/menu.svg';
@@ -75,15 +77,6 @@ const HeaderIcon = styled.img`
   margin: 10px;
 `;
 
-const SideMenu = styled.div`
-  position: fixed;
-  top: 45px;
-  bottom: 0px;
-  width: 80%;
-  background-color: white;
-  padding: 10px;
-`;
-
 const navItems = [
   { name: 'Mens', route: '/' },
   { name: 'Womens', route: '/' },
@@ -95,14 +88,15 @@ const icons = [cartIcon, userIcon];
 
 const Header = () => {
   const [searching, setSearching] = React.useState(false);
-  const [menuOpen, setMenuOpen] = React.useState(false);
 
   const size = useWindowSize();
+
+  const dispatch = useDispatch();
 
   return (
     <div>
       <HeaderWrapper>
-        <HeaderIcon src={menuIcon} onClick={() => setMenuOpen(!menuOpen)} />
+        <HeaderIcon src={menuIcon} onClick={() => dispatch(openMenu())} />
         <Logo src={logo} />
         <MenuWrapper>
           {size.width > 1024 ? (
@@ -132,10 +126,8 @@ const Header = () => {
           : ''
       }
       {
-        menuOpen ? (
-          <SideMenu>
-            <HighlightOffIcon className="float-right" fontSize="large" onClick={() => setMenuOpen(!menuOpen)} />
-          </SideMenu>
+        useSelector(getMenuOpen) ? (
+          <SideMenu />
         )
           : ''
       }

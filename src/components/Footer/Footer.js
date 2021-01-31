@@ -63,13 +63,13 @@ const Wrapper = styled.div`
 `;
 
 const AccordionWrapper = styled.div`
-margin-bottom: -10px;
-margin-bottom: 10px;
+  margin-bottom: -10px;
+  margin-bottom: 10px;
 `;
 const IconWrapper = styled.div`
-margin-left: -10px;
-display: flex;
-column-gap: 10px;
+  margin-left: -10px;
+  display: flex;
+  column-gap: 10px;
 `;
 
 const Footer = () => {

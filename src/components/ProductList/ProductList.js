@@ -1,0 +1,72 @@
+import React from 'react';
+import styled from 'styled-components';
+
+import heroImage from '../../assets/Hero.png';
+import menImage from '../../assets/mens.png';
+import womenImage from '../../assets/womens.png';
+
+const Wrapper = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+`;
+
+const ItemWrapper = styled.div`
+  flex-grow: 1;
+  width: 150px;
+  padding: 5px;
+  ${({ grow }) => grow && `
+    flex-grow: 2;
+  `}
+  display: flex;
+  flex-direction: column;
+  row-gap: 0px;
+`;
+
+const ItemImage = styled.img`
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+`;
+
+const ButtonWrapper = styled.div`
+  background-color: #10504f;
+  font-family: "Pacifico", cursive;
+  font-weight: lighter;
+  font-size: 20px;
+  color: #fff;
+  height: 42px;
+`;
+const images = [heroImage, menImage, womenImage];
+
+const items = [
+  {
+    title: "Women's",
+    icon: womenImage,
+  },
+  {
+    title: "Men's",
+    icon: menImage,
+  },
+  {
+    title: 'Accessories',
+    icon: heroImage,
+  },
+];
+
+const ProductList = () => (
+  <Wrapper>
+    {items.map((item, i) => (
+      <ItemWrapper grow={i === images.length - 1 && i % 2 === 0}>
+        <ItemImage src={item.icon} />
+        <ButtonWrapper>
+          {item.title}
+        </ButtonWrapper>
+      </ItemWrapper>
+    ))}
+
+  </Wrapper>
+);
+
+export default ProductList;

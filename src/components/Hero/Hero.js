@@ -10,6 +10,7 @@ import mailIcon from '../../assets/mail.svg';
 import ShopForm from '../ShopForm/ShopForm';
 import ShopList from '../ShopList/ShopList';
 import InstagramForm from '../InstagramForm/InstagramForm';
+import ProductList from '../ProductList/ProductList';
 
 const HeroWrapper = styled.div`
   position: relative;
@@ -28,6 +29,7 @@ const Hero = () => (
     <Carousel showArrows={false} showThumbs={false} showStatus={false}>
       { images.map(item => (<HeroImage src={item} />)) }
     </Carousel>
+    <ProductList />
     <ShopForm title="Shop New Arrivals" body="Our coolest new items are waiting for you!" buttonText="Shop Now" />
     <ShopList />
     <Carousel showArrows={false} showThumbs={false} showStatus={false}>

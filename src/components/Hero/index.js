@@ -8,6 +8,8 @@ import menImage from '../../assets/mens.png';
 import womenImage from '../../assets/womens.png';
 import mailIcon from '../../assets/mail.svg';
 import ShopForm from '../ShopForm/ShopForm';
+import ShopList from '../ShopList/ShopList';
+import InstagramForm from '../InstagramForm/InstagramForm';
 
 const HeroWrapper = styled.div`
   position: relative;
@@ -19,21 +21,20 @@ const HeroImage = styled.img`
   margin: auto;
 `;
 
+const images = [heroImage, menImage, womenImage];
+
 const Hero = () => (
   <HeroWrapper>
     <Carousel showArrows={false} showThumbs={false} showStatus={false}>
-      <div>
-        <HeroImage src={heroImage} />
-      </div>
-      <div>
-        <HeroImage src={menImage} />
-      </div>
-      <div>
-        <HeroImage src={womenImage} />
-      </div>
+      { images.map(item => (<HeroImage src={item} />)) }
     </Carousel>
     <ShopForm title="Shop New Arrivals" body="Our coolest new items are waiting for you!" buttonText="Shop Now" />
+    <ShopList />
+    <Carousel showArrows={false} showThumbs={false} showStatus={false}>
+      {images.map(item => (<HeroImage src={item} />))}
+    </Carousel>
     <ShopForm title="Our Favorite Tees" body="Everyday tees you need!" buttonText="Shop Now" />
+    <InstagramForm />
     <ShopForm titleIcon={mailIcon} darkMode="TRUE" title="Sign Up & Stay Connected" body="Sign up for the newsletter and get 20% off! Gain access to exclusive offers and be the first to know when new stuff drops!" buttonText="Subscribe" />
   </HeroWrapper>
 );

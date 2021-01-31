@@ -8,10 +8,7 @@ export function openMenu() {
 }
 
 export function closeMenu() {
-  console.log('Close Menu action');
   return {
     type: CLOSE_MENU,
   };
 }
-
-export const getMenuOpen = (state) => state.menuOpen;

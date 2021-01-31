@@ -12,7 +12,6 @@ const reducer = (state = initialState, action) => {
         menuOpen: true,
       };
     case CLOSE_MENU:
-      console.log('Close menu reducer');
       return {
         ...state,
         menuOpen: false,

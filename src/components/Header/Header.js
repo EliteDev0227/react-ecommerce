@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { openMenu, getMenuOpen } from '../../actions';
+import { openMenu } from '../../actions';
 import { useWindowSize } from '../../hooks';
 import SideMenu from '../SideMenu/SideMenu';
 
@@ -93,6 +93,8 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
+  const isMenuOpen = useSelector((state) => state.menuOpen);
+
   return (
     <div>
       <HeaderWrapper>
@@ -126,7 +128,7 @@ const Header = () => {
           : ''
       }
       {
-        useSelector(getMenuOpen) ? (
+        isMenuOpen ? (
           <SideMenu />
         )
           : ''

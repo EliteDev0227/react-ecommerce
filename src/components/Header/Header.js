@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { openMenu } from '../../actions';
+import { closeMenu, openMenu } from '../../actions';
 import { useWindowSize } from '../../hooks';
 import SideMenu from '../SideMenu/SideMenu';
 
@@ -128,7 +128,11 @@ const Header = () => {
           {isMobile ? null : (
             <>
               {navItems.map(item => (
-                <MenuItem className="navbar-brand" to={item.route}>
+                <MenuItem
+                  className="navbar-brand"
+                  to={item.route}
+                  onClick={() => dispatch(isMenuOpen ? closeMenu() : openMenu())}
+                >
                   {item.name}
                 </MenuItem>
               ))}

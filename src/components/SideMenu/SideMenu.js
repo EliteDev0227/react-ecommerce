@@ -11,14 +11,23 @@ import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import { closeMenu } from '../../actions';
 import heroImage from '../../assets/Hero.png';
 
+import { useWindowSize } from '../../hooks';
+
 const SideMenuWrapper = styled.div`
   position: fixed;
-  top: 45px;
-  bottom: 0px;
-  width: 80%;
   background-color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
+  top: 200px;
+  width: 70%;
+  left: 15%;
+  ${({ isMobile }) => isMobile && `
+    flex-direction: column;
+    top: 45px;
+    bottom: 0px;
+    width: 80%;
+    left: 0%;
+  `}
 `;
 
 const CloseIconWrapper = styled.div`
@@ -28,10 +37,18 @@ const CloseIconWrapper = styled.div`
 `;
 
 const AccordionWrapper = styled.div`
-  margin-right: 10px;
-  margin-left: 35px;
-  margin-bottom: -10px;
-  margin-bottom: 10px;
+  margin: 40px;
+  display: flex;
+  column-gap: 90px;
+  align-items: flex-start;
+  ${({ isMobile }) => !isMobile && `
+    width: 100%;
+  `}
+  ${({ isMobile }) => isMobile && `
+    margin-left: 20px;
+    margin-top: 0px;
+    flex-direction: column;
+  `}
 `;
 
 const Accordion = withStyles({
@@ -44,7 +61,7 @@ const Accordion = withStyles({
       display: 'none',
     },
     '&$expanded': {
-      margin: 'auto',
+      margin: 0,
     },
   },
   expanded: {},
@@ -84,25 +101,33 @@ line-height: 38px;
 `;
 
 const BottomWrapper = styled.div`
-  width: 100%;
-  height: 175px;
-  position: absolute;
-  bottom: 0;
   background-color: #EFEFEF;
   display: flex;
+  ${({ isMobile }) => isMobile && `
+    width: 100%;
+    height: 175px;
+    position: absolute;
+    bottom: 0;
+  `}
+
 `;
 
 const BottomImage = styled.img`
-  height: 140px;
-  width: 100px;
+  height: 250px;
+  width: 250px;
   object-fit: cover;
   margin: 20px;
-  flex-grow: 1;
+  ${({ isMobile }) => isMobile && `
+    height: 140px;
+    width: 100px;
+  `}
 `;
 
 const BottomItemWrapper = styled.div`
-  flex-grow: 1;
-  margin: 10px;
+  margin: 50px;
+  ${({ isMobile }) => isMobile && `
+    margin: 10px;
+  `}
   display: flex;
   flex-direction: column;
   column-gap: 10px;
@@ -131,18 +156,26 @@ const botItems = [
 ];
 
 const SideMenu = () => {
+  const size = useWindowSize();
+
+  const isMobile = size.width < 1024;
+
   const dispatch = useDispatch();
   return (
-    <SideMenuWrapper>
-      <CloseIconWrapper>
-        <HighlightOffIcon className="float-right" fontSize="large" onClick={() => { dispatch(closeMenu()); }} />
-      </CloseIconWrapper>
+    <SideMenuWrapper isMobile={isMobile}>
+      {
+        isMobile ? (
+          <CloseIconWrapper>
+            <HighlightOffIcon className="float-right" fontSize="large" onClick={() => { dispatch(closeMenu()); }} />
+          </CloseIconWrapper>
+        ) : null
+      }
 
-      <AccordionWrapper>
+      <AccordionWrapper isMobile={isMobile}>
         {menuData.map(item => (
-          <Accordion square>
+          <Accordion square defaultExpanded>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={isMobile ? <ExpandMoreIcon /> : null}
             >
               <MainCatText className="text-subtitle">{item.mainCat}</MainCatText>
             </AccordionSummary>
@@ -157,9 +190,9 @@ const SideMenu = () => {
         ))}
       </AccordionWrapper>
 
-      <BottomWrapper>
-        <BottomImage src={heroImage} />
-        <BottomItemWrapper>
+      <BottomWrapper isMobile={isMobile}>
+        <BottomImage isMobile={isMobile} src={heroImage} />
+        <BottomItemWrapper isMobile={isMobile}>
           {botItems.map(item => (
             <SubCatText className="text-subtitle">{item}</SubCatText>
           ))}

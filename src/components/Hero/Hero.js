@@ -39,8 +39,8 @@ const Hero = () => {
       <Carousel showArrows={false} showThumbs={false} showStatus={false}>
         {images.map(item => (<HeroImage isMobile={isMobile} src={item} />))}
       </Carousel>
-      <ProductList />
       <ShopForm title="Shop New Arrivals" body="Our coolest new items are waiting for you!" buttonText="Shop Now" />
+      <ProductList />
       <ShopList />
       <Carousel showArrows={false} showThumbs={false} showStatus={false}>
         {images.map(item => (<HeroImage isMobile={isMobile} src={item} />))}

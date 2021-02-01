@@ -71,7 +71,9 @@ const SearchBoxWrapper = styled.div`
   margin: auto;
   background-color: white;
   display: flex;
-  padding: 5px;
+  ${({ isMobile }) => isMobile && `
+    padding: 5px;
+  `}
 `;
 
 const SearchBoxInput = styled.input`
@@ -146,7 +148,7 @@ const Header = () => {
           {
             isMobile ? <HeaderIcon src={zoomIcon} onClick={() => setSearching(!searching)} /> : (
               searching ? (
-                <SearchBoxWrapper>
+                <SearchBoxWrapper isMobile={isMobile}>
                   <SearchBoxInput />
                   <SearchBoxButton onClick={() => setSearching(!searching)}>GO</SearchBoxButton>
                 </SearchBoxWrapper>
@@ -157,7 +159,7 @@ const Header = () => {
       </HeaderWrapper>
       {
         searching && isMobile ? (
-          <SearchBoxWrapper>
+          <SearchBoxWrapper isMobile={isMobile}>
             <SearchBoxInput />
             <SearchBoxButton onClick={() => setSearching(!searching)}>GO</SearchBoxButton>
           </SearchBoxWrapper>

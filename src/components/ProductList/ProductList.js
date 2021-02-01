@@ -5,6 +5,8 @@ import heroImage from '../../assets/Hero.png';
 import menImage from '../../assets/mens.png';
 import womenImage from '../../assets/womens.png';
 
+import { useWindowSize } from '../../hooks';
+
 const Wrapper = styled.div`
   padding: 20px;
   display: flex;
@@ -25,7 +27,10 @@ const ItemWrapper = styled.div`
 `;
 
 const ItemImage = styled.img`
-  height: 220px;
+  height: 470px;
+  ${({ isMobile }) => isMobile && `
+    height: 220px;
+  `}
   width: 100%;
   object-fit: cover;
 `;
@@ -55,18 +60,24 @@ const items = [
   },
 ];
 
-const ProductList = () => (
-  <Wrapper>
-    {items.map((item, i) => (
-      <ItemWrapper grow={i === images.length - 1 && i % 2 === 0}>
-        <ItemImage src={item.icon} />
-        <ButtonWrapper>
-          {item.title}
-        </ButtonWrapper>
-      </ItemWrapper>
-    ))}
+const ProductList = () => {
+  const size = useWindowSize();
 
-  </Wrapper>
-);
+  const isMobile = size.width < 1024;
+
+  return (
+    <Wrapper>
+      {items.map((item, i) => (
+        <ItemWrapper grow={isMobile && i === images.length - 1 && i % 2 === 0}>
+          <ItemImage isMobile={isMobile} src={item.icon} />
+          <ButtonWrapper>
+            {item.title}
+          </ButtonWrapper>
+        </ItemWrapper>
+      ))}
+
+    </Wrapper>
+  );
+};
 
 export default ProductList;

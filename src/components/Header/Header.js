@@ -14,8 +14,12 @@ import cartIcon from '../../assets/cart.svg';
 
 const HeaderWrapper = styled.div`
   background-color: #11504f;
-  height: 64px;
+  height: 138px;
   display: flex;
+  ${({ isMobile }) => isMobile && `
+    height: 64px;
+  `}
+
 `;
 
 const MenuWrapper = styled.div`
@@ -35,21 +39,35 @@ const MenuItem = styled(NavLink)`
 `;
 
 const Logo = styled.img`
+  width: 93px;
+  height: 77px;
+  margin: auto;
   margin-left: 20px;
-  margin-top: 9px;
-  max-height: 46px;
-  width: auto;
-  height: auto;
+  ${({ isMobile }) => isMobile && `
+  width: 56px;
+  height: 46px;
+  margin: auto;
+  `}
 `;
 
-const MenuIconWrapper = styled.div`
-  width:100%;
-  padding-right: 10px;
+const HeaderIconWrapper = styled.div`
+  height: 40px;
+  width: 440px;
+  flex-shrink: 0;
+  margin: auto;
+  padding-right: 40px;
+  ${({ isMobile }) => isMobile && `
+    flex-shrink: 1;
+    padding-right: 10px;
+  `}
+  display: flex;
+  flex-direction: row-reverse;
+  float: right;
 `;
 
 const SearchBoxWrapper = styled.div`
   width: 325px;
-  height: 37px;
+  height: 40px;
   margin: auto;
   background-color: white;
   display: flex;
@@ -84,12 +102,14 @@ const navItems = [
   { name: 'Sale!', route: '/' },
 ];
 
-const icons = [cartIcon, userIcon];
+const icons = [userIcon, cartIcon];
 
 const Header = () => {
   const [searching, setSearching] = React.useState(false);
 
   const size = useWindowSize();
+
+  const isMobile = size.width < 1024;
 
   const dispatch = useDispatch();
 
@@ -97,11 +117,15 @@ const Header = () => {
 
   return (
     <div>
-      <HeaderWrapper>
-        <HeaderIcon src={menuIcon} onClick={() => dispatch(openMenu())} />
-        <Logo src={logo} />
+      <HeaderWrapper isMobile={isMobile}>
+        {isMobile ? (
+          <>
+            <HeaderIcon src={menuIcon} onClick={() => dispatch(openMenu())} />
+          </>
+        ) : null}
+        <Logo isMobile={isMobile} src={logo} />
         <MenuWrapper>
-          {size.width > 1024 ? (
+          {isMobile ? null : (
             <>
               {navItems.map(item => (
                 <MenuItem className="navbar-brand" to={item.route}>
@@ -109,17 +133,26 @@ const Header = () => {
                 </MenuItem>
               ))}
             </>
-          ) : null}
-          <MenuIconWrapper>
-            {icons.map(item => (
-              <img className="icon float-right" src={item} />
-            ))}
-            <HeaderIcon className="float-right" src={zoomIcon} onClick={() => setSearching(!searching)} />
-          </MenuIconWrapper>
+          )}
         </MenuWrapper>
+        <HeaderIconWrapper isMobile={isMobile}>
+          {icons.map(item => (
+            <img className="icon" src={item} />
+          ))}
+          {
+            isMobile ? <HeaderIcon src={zoomIcon} onClick={() => setSearching(!searching)} /> : (
+              searching ? (
+                <SearchBoxWrapper>
+                  <SearchBoxInput />
+                  <SearchBoxButton onClick={() => setSearching(!searching)}>GO</SearchBoxButton>
+                </SearchBoxWrapper>
+              ) : <HeaderIcon src={zoomIcon} onClick={() => setSearching(!searching)} />
+            )
+          }
+        </HeaderIconWrapper>
       </HeaderWrapper>
       {
-        searching ? (
+        searching && isMobile ? (
           <SearchBoxWrapper>
             <SearchBoxInput />
             <SearchBoxButton onClick={() => setSearching(!searching)}>GO</SearchBoxButton>
